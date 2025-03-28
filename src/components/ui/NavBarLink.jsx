@@ -15,68 +15,82 @@ const NavBarLink = () => {
 
     return (
         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-        {isAuthenticated ? (
+            {/* Add these links for everyone */}
             
-            <>
-
+            
             <li className="nav-item">
                 <NavLink
-                to="/profile"
+                to="/contacto"
                 className={({isActive}) => 
-                 isActive ? "nav-link active fw-semibold" : "nav-link fw-semibold"
-                }
-                end
-                >
-                    {`Hi, ${username}`}
-                </NavLink>
-            </li>
-
-            <li className='nav-item' onClick={logout}>
-                <NavLink
-                to="/"
-                className={({isActive}) =>
                     isActive ? "nav-link active fw-semibold" : "nav-link fw-semibold"
                 }
-                end
                 >
-                    cerrar sesion
+                    Contacto
                 </NavLink>
             </li>
             
-            </>
-
-        ):(
-
-            <>
-            
-            <li className="nav-item">
-            <NavLink
-                to="/login"
-                className={({isActive}) =>
-                    isActive ? "nav-link active fw-semibold" : "nav-link fw-semibold"
-                }
-                end
-                >
-                    Iniciar Sesion
-                </NavLink>
-                </li>
+            {isAuthenticated ? (
+                
+                <>
 
                 <li className="nav-item">
                     <NavLink
-                    to="/register"
+                    to="/profile"
+                    className={({isActive}) => 
+                    isActive ? "nav-link active fw-semibold" : "nav-link fw-semibold"
+                    }
+                    end
+                    >
+                        {`Hi, ${username}`}
+                    </NavLink>
+                </li>
+
+                <li className='nav-item' onClick={logout}>
+                    <NavLink
+                    to="/"
                     className={({isActive}) =>
                         isActive ? "nav-link active fw-semibold" : "nav-link fw-semibold"
                     }
                     end
                     >
-                        Registrarse
+                        cerrar sesion
                     </NavLink>
                 </li>
-            
-            </>
-        )
-        }
-            
+                
+                </>
+
+            ):(
+
+                <>
+                
+                <li className="nav-item">
+                <NavLink
+                    to="/login"
+                    className={({isActive}) =>
+                        isActive ? "nav-link active fw-semibold" : "nav-link fw-semibold"
+                    }
+                    end
+                    >
+                        Iniciar Sesion
+                    </NavLink>
+                    </li>
+
+                    <li className="nav-item">
+                        <NavLink
+                        to="/register"
+                        className={({isActive}) =>
+                            isActive ? "nav-link active fw-semibold" : "nav-link fw-semibold"
+                        }
+                        end
+                        >
+                            Registrarse
+                        </NavLink>
+                    </li>
+                
+                </>
+            )
+            }
+                
              </ul>
     )
 }

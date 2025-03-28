@@ -12,7 +12,7 @@ const Footer = () => {
                 <a href="#" className="text-white text-decoration-none mx-2">Casa</a>
                 <a href="#" className="text-white text-decoration-none mx-2">Sobre</a>
                 <a href="#" className="text-white text-decoration-none mx-2">Tienda</a>
-                <a href="#" className="text-white text-decoration-none mx-2">Contacto</a>
+                <a href="/contact" className="text-white text-decoration-none mx-2">Contacto</a>
             </div>
         {/* social media icons section */}
             <div className="mb-2">

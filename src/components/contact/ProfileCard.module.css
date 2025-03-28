@@ -1,0 +1,89 @@
+.profileCard {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profileCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+  
+  .profileImageContainer {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%; /* Creates a square aspect ratio */
+    position: relative;
+    overflow: hidden;
+    background-color: #f0f0f0;
+  }
+  
+  .profileImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .profileCard:hover .profileImage {
+    transform: scale(1.05);
+  }
+  
+  .profileContent {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profileName {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.25rem;
+  }
+  
+  .profileRole {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #6050DC;
+    margin-bottom: 1rem;
+  }
+  
+  .profileDescription {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #555;
+    margin-bottom: 1.25rem;
+    flex-grow: 1;
+  }
+  
+  .socialLinks {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: auto;
+  }
+  
+  .socialLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #6050DC;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  
+  .socialLink:hover {
+    background-color: #4b3bcb;
+  }

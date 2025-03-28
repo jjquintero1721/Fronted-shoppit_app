@@ -13,7 +13,7 @@ import { AuthProvider } from './context/AuthContext';
 import UserProfilePage from './components/user/UserProfilePage';
 import PaymentStatusPage from './components/payment/PaymentStatusPage';
 import RegisterPage from './components/user/RegisterPage';
-
+import ContactPage from './components/contact/ContactPage'; // Import the new ContactPage
 
 const App = () => {
 
@@ -40,18 +40,19 @@ useEffect(function(){
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<MainLayout numCartItems={numCartItems} />}>
-      <Route index element={<HomePage />} />
-      <Route path="products/:slug" element={<ProductPage setNumberCartItems={setNumberCartItems}/>} />
-      <Route path="cart" element={<CartPage setNumberCartItems={setNumberCartItems} />} />
-      <Route path="checkout" element={
-        <ProtectedRoute>
-          <CheckoutPage />
+        <Route index element={<HomePage />} />
+        <Route path="products/:slug" element={<ProductPage setNumberCartItems={setNumberCartItems}/>} />
+        <Route path="cart" element={<CartPage setNumberCartItems={setNumberCartItems} />} />
+        <Route path="checkout" element={
+          <ProtectedRoute>
+            <CheckoutPage />
           </ProtectedRoute>} />
-      <Route path="login" element={<LoginPage />} />
-      <Route path="register" element={<RegisterPage />} />
-      <Route path="profile" element={<UserProfilePage />} />
-      <Route path="*" element={<NotFoundPage />} />
-      <Route path="payment-status" element={<PaymentStatusPage setNumberCartItems={setNumberCartItems} />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="register" element={<RegisterPage />} />
+        <Route path="profile" element={<UserProfilePage />} />
+        <Route path="contacto" element={<ContactPage />} /> {/* Add the new route */}
+        <Route path="*" element={<NotFoundPage />} />
+        <Route path="payment-status" element={<PaymentStatusPage setNumberCartItems={setNumberCartItems} />} />
       </Route>
     </Routes> 
     </BrowserRouter>
