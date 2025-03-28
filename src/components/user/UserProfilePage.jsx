@@ -33,12 +33,9 @@ const UserProfilePage = () => {
 
   return (
     <div className="container my-5">
-      {/* Profile header */}
-
-      <UserInfo userInfo={userInfo} />
-
-    {/* Profile header */}
-    <OrderHistoryItemContainer />
+      
+        <UserInfo userInfo={userInfo} />
+        <OrderHistoryItemContainer orderItems={orderItems} />
 
     </div>
   )
