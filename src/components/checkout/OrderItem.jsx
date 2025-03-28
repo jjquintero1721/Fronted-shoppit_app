@@ -7,7 +7,7 @@ const OrderItem = ({cartItem, product}) => {
     <div className="d-flex align-items-center">
         <img
             src={`${BASE_URL}${cartItem.product.image}`}
-            alt="Product"
+            alt={cartItem.product.name}
             className="img-fluid"
             style={{width: '60px', height: '60px', objectFit: 'cover', borderRadius: '5px'}}
     />

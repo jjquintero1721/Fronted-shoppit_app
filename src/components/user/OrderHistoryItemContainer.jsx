@@ -7,7 +7,7 @@ const OrderHistoryItemContainer = ({orderItems}) => {
     <div className='col-md-12'>
         <div className='card'>
             <div className='card-header' style={{ backgroundColor: '#6050DC', color: 'white'}}>
-                <h5>Order History</h5>
+                <h5>Historial de compra</h5>
             </div>
 
             {orderItems.map(item => <OrderHistoryItem key={item.id} item={item} />)}

@@ -9,10 +9,10 @@ const Footer = () => {
         <div className="container text-center">
             {/* Quick links section */}
             <div className="mb-2">
-                <a href="#" className="text-white text-decoration-none mx-2">Home</a>
-                <a href="#" className="text-white text-decoration-none mx-2">About</a>
-                <a href="#" className="text-white text-decoration-none mx-2">Shop</a>
-                <a href="#" className="text-white text-decoration-none mx-2">Contact</a>
+                <a href="#" className="text-white text-decoration-none mx-2">Casa</a>
+                <a href="#" className="text-white text-decoration-none mx-2">Sobre</a>
+                <a href="#" className="text-white text-decoration-none mx-2">Tienda</a>
+                <a href="#" className="text-white text-decoration-none mx-2">Contacto</a>
             </div>
         {/* social media icons section */}
             <div className="mb-2">

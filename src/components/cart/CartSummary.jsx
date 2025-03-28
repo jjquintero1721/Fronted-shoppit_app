@@ -11,7 +11,7 @@ const CartSummary = ({cartTotal, tax}) => {
     <div className="col-md-4 align-self-start">
       <div className='card'>
         <div className='card-body'>
-            <h5 className='card-title'>Cart Summary</h5>
+            <h5 className='card-title'>Resumen del carrito</h5>
             <hr />
             <div className='d-flex justify-content-between'>
                 <span>Subtotal</span>
@@ -30,7 +30,7 @@ const CartSummary = ({cartTotal, tax}) => {
             className='btn btn-primary w-100'
             style={{ backgroundColor: '#6050DC', borderBlockColor: '#6050DC'}}
             >
-                Proceed to checkout
+                Proceder con el checkout
             </button>
             </Link>
         </div>

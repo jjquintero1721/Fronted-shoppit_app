@@ -43,17 +43,17 @@ const PaymentSection = () => {
     <div className='col-md-4'>
     <div className={`card ${styles.card}`}>
         <div className="card-header" style={{ backgroundColor: '#6050DC', color:"white"}}>
-            <h5>Payment Options</h5>
+            <h5>Opciones de pago</h5>
         </div>
         <div className="card-body">
             {/* PayPal Button */}
             <button className={`btn btn-primary w-100 mb-3 ${styles.paypalButton}`} onClick={paypalPayment} id="paypal-button">
-                <i className="bi bi-paypal"></i> Pay with Paypal
+                <i className="bi bi-paypal"></i> Pagar con Paypal
             </button>
 
             {/* Flutterwave Button */}
             <button className={`btn btn-warning w-100 ${styles.flutterwaveButton}`} onClick={makePayment} id="flutterwave-button">
-                <i className="bi bi-credit-card"></i> Pay with Flutterwave
+                <i className="bi bi-credit-card"></i> Pagar con flutterwave
             </button>
         </div>
     </div>

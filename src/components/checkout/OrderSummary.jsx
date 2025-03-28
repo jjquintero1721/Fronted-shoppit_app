@@ -12,7 +12,7 @@ const OrderSummary = ({cartItems, cartTotal, tax}) => {
     <div className="col-md-8">
         <div className={`card mb-4 ${styles.card}`}>
             <div className="card-header" style={{backgroundColor: '#6050DC', color:"white"}}>
-                <h5>Cart Summary</h5>
+                <h5>Resumen del carrito</h5>
             </div>
             <div className="card-body">
                

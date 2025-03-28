@@ -49,7 +49,7 @@ const ProductPage = ({setNumberCartItems}) => {
 
     useEffect(function(){
         setLoading(true)
-        api.get(`product_detail/${slug}`)
+        api.get(`/product_detail/${slug}`)
         .then(res => {
             console.log(res.data)
             setProduct(res.data)
@@ -62,13 +62,12 @@ const ProductPage = ({setNumberCartItems}) => {
         })
     }, [slug])
 
-    if(loading){
+    if(loading) {
         return <ProductPagePlaceHolder />
     }
 
   return (
     <div>
-        <ProductPagePlaceHolder />
         <section className="py-3">
             <div className="container px-4 px-lg-5 my-5">
                 <div className="row gx-4 gx-lg-5 align-items-center">
@@ -86,19 +85,18 @@ const ProductPage = ({setNumberCartItems}) => {
                             <span>{`$${product.price}`}</span>
                     </div>
                     <p className="lead">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!
-                        Lorem ipsum dolor sit amet.
+                        {product.description}
                     </p>
                     <div className="d-flex">
                         
                         <button
-                            className="btn btn-outline-dark flex-shrink-0"
-                            type="button"
-                            onClick={add_item}
-                            disabled={inCart}
+                        className="btn btn-outline-dark flex-shrink-0"
+                        type="button"
+                        onClick={add_item}
+                        disabled={inCart}
                         >
                             <i className="bi-cart-fill me-1"></i>
-                            {inCart ? "Product added to cart" : "Add to cart"}
+                            {inCart? "Producto añadido al carrito" : "Añadir al carro"}
                         </button>
                     </div>
                 </div>

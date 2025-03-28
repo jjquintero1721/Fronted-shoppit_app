@@ -7,13 +7,17 @@ import 'react-toastify/dist/ReactToastify.css'
 
 const MainLayout = ({numCartItems}) => {
   return (
-    <>
-    <NavBar numCartItems={numCartItems} />
-    <ToastContainer />
-    <Outlet />
-    <Footer />
-    </>
+    <div style={{
+      backgroundImage: 'url("/src/assets/Banner.")', 
+      backgroundSize: 'cover',
+      backgroundAttachment: 'fixed',
+      minHeight: '100vh'
+    }}>
+      <NavBar numCartItems={numCartItems} />
+      <ToastContainer />
+      <Outlet />
+      <Footer />
+    </div>
   )
 }
-
 export default MainLayout

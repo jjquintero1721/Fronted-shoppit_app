@@ -4,7 +4,7 @@ const RelatedProducts = ({products}) => {
   return (
     <section className="py-3 bg-light">
     <div className="container px-4 px-lg-5 mt-3">
-        <h2 className="fw-bolder mb-4">Related Products</h2>
+        <h2 className="fw-bolder mb-4">Productos Relacionados</h2>
         <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-x1-4 justify-content-center">
             {products.map(product => <HomeCard key={product.id} product={product} />) }
         </div>

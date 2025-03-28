@@ -15,12 +15,12 @@ const itemID = {item_id: item.id}
 
 
 function deleteCartitem(){
-    const confirmDelete = window.confirm("Are you want to delete this caritem")
+    const confirmDelete = window.confirm("Estas seguro de que quieres eliminar este item?")
     if(confirmDelete){
         api.post("delete_cartitem", itemID)
         .then(res =>{
             console.log(res.data)
-            toast.success("Cartitem deleted successfull")
+            toast.success("Item del carrito eliminado correctamente")
             setCartItems(cartItems.filter(cartItems => cartItems.id != item.id))
             setCartTotal(cartItems.filter((cartItem) => cartItem.id != item.id)
             .reduce((acc, curr) => acc + curr.total, 0))
@@ -87,7 +87,7 @@ function updateCartitem(){
                 style={{backgroundColor: "#4b3bcb", color:"white"}} disabled={loading}>
                     {loading ? "Updating" : "Update"}
                     </button>
-                <button className="btn btn-danger btn-sm" onClick={deleteCartitem}>remove</button>
+                <button className="btn btn-danger btn-sm" onClick={deleteCartitem}>eliminar</button>
             </div>    
         </div>
       

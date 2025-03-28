@@ -1,0 +1,12 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    background-image: url('/src/assets/FONDO.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  
+  /* Para asegurar que todas las tarjetas y componentes sean transparentes */
+  .card {
+    background-color: rgba(255, 255, 255, 0.8) !important; /* Fondo semi-transparente */
+  }

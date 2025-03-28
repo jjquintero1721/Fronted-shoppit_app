@@ -39,7 +39,7 @@ const NavBarLink = () => {
                 }
                 end
                 >
-                    Logout
+                    cerrar sesion
                 </NavLink>
             </li>
             
@@ -57,7 +57,7 @@ const NavBarLink = () => {
                 }
                 end
                 >
-                    Login
+                    Iniciar Sesion
                 </NavLink>
                 </li>
 
@@ -69,7 +69,7 @@ const NavBarLink = () => {
                     }
                     end
                     >
-                        Register
+                        Registrarse
                     </NavLink>
                 </li>
             
