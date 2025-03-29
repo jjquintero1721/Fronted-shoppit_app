@@ -14,6 +14,7 @@ import UserProfilePage from './components/user/UserProfilePage';
 import PaymentStatusPage from './components/payment/PaymentStatusPage';
 import RegisterPage from './components/user/RegisterPage';
 import ContactPage from './components/contact/ContactPage';
+import SearchResults from './components/search/SearchResults'; // Importar el componente de búsqueda
 
 
 const App = () => {
@@ -65,6 +66,7 @@ const App = () => {
             <Route path="register" element={<RegisterPage />} />
             <Route path="profile" element={<UserProfilePage />} />
             <Route path="contacto" element={<ContactPage />} />
+            <Route path="search" element={<SearchResults />} /> {/* Nueva ruta para la búsqueda */}
             <Route path="*" element={<NotFoundPage />} />
             <Route path="payment-status" element={<PaymentStatusPage setNumberCartItems={setNumberCartItems} />} />
           </Route>

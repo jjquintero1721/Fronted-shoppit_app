@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Navbar, Container, Button } from 'react-bootstrap';
 import styles from "./NavBar.module.css";
 import NavBarLink from './NavBarLink';
+import SearchBar from '../search/SearchBar'; // Importar el componente de búsqueda
 
 const NavBar = ({ numCartItems }) => {
   return (
@@ -11,6 +12,10 @@ const NavBar = ({ numCartItems }) => {
         <Navbar.Brand as={Link} to="/" className="fw-bold text-uppercase">A.I.A.G</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarContent" />
         <Navbar.Collapse id="navbarContent">
+          {/* Agregar el componente SearchBar */}
+          <div className="d-flex flex-grow-1 mx-lg-3">
+            <SearchBar />
+          </div>
           <NavBarLink />
           <Link to="/cart" className={`btn btn-dark ms-3 rounded-pill position-relative  ${styles.responsiveCart}`}>
           <HiMiniShoppingCart />

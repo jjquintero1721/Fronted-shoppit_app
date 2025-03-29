@@ -1,0 +1,23 @@
+.searchTitle {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    border-bottom: 2px solid #6050DC;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+  }
+  
+  .noResults {
+    text-align: center;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    margin-bottom: 2rem;
+  }
+  
+  .relatedTitle {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #6050DC;
+    text-align: center;
+  }
