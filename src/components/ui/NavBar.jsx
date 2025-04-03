@@ -1,15 +1,16 @@
+// src/components/ui/NavBar.jsx
 import { HiMiniShoppingCart } from "react-icons/hi2";
 import { Link } from 'react-router-dom';
 import { Navbar, Container, Button } from 'react-bootstrap';
 import styles from "./NavBar.module.css";
 import NavBarLink from './NavBarLink';
-import SearchBar from '../search/SearchBar'; // Importar el componente de búsqueda
+import SearchBar from '../search/SearchBar';
 
 const NavBar = ({ numCartItems }) => {
   return (
-    <Navbar expand="lg" className={`navbar-light bg-white shadow-sm py-3 ${styles.stickyNavbar}`}>
+    <Navbar expand="lg" className={`navbar-dark bg-dark shadow-sm py-3 ${styles.stickyNavbar}`}>
       <Container>
-        <Navbar.Brand as={Link} to="/" className="fw-bold text-uppercase">A.I.A.G</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/" className="fw-bold text-uppercase text-light">A.I.A.G</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarContent" />
         <Navbar.Collapse id="navbarContent">
           {/* Agregar el componente SearchBar */}
@@ -17,8 +18,8 @@ const NavBar = ({ numCartItems }) => {
             <SearchBar />
           </div>
           <NavBarLink />
-          <Link to="/cart" className={`btn btn-dark ms-3 rounded-pill position-relative  ${styles.responsiveCart}`}>
-          <HiMiniShoppingCart />
+          <Link to="/cart" className={`btn btn-dark ms-3 rounded-pill position-relative ${styles.responsiveCart}`}>
+          <HiMiniShoppingCart color="white" />
             {numCartItems > 0 && (
               <span
                 className="position-absolute top-0 start-100 translate-middle badge rounded-pill"

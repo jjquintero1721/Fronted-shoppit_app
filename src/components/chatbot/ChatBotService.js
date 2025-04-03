@@ -1,4 +1,5 @@
 import OllamaConnector from './OllamaConnector';
+import api from '../../api';
 
 class ChatBotService {
   constructor(api) {
@@ -458,6 +459,246 @@ async getOllamaResponse(message, isAuthenticated) {
     
     return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
   }
+
+  // Agregar estos métodos a la clase ChatBotService en src/components/chatbot/ChatBotService.js
+
+// Método para obtener información de productos
+async getProductInfo(productQuery) {
+  try {
+    // Buscar el producto
+    const searchResults = await api.searchProducts(productQuery);
+    
+    if (searchResults.results && searchResults.results.length > 0) {
+      const product = searchResults.results[0]; // Obtener el mejor resultado
+      
+      return {
+        found: true,
+        product: product,
+        message: `¡He encontrado "${product.name}"! Precio: $${product.price}. ¿Quieres ver más detalles?`,
+        url: `/products/${product.slug}`
+      };
+    } else {
+      return {
+        found: false,
+        message: `Lo siento, no encontré ningún producto que coincida con "${productQuery}". ¿Quieres buscar algo más?`
+      };
+    }
+  } catch (error) {
+    console.error('Error al obtener información del producto:', error);
+    return {
+      found: false,
+      message: "Lo siento, tuve un problema al buscar ese producto. ¿Puedes intentar con otro término de búsqueda?"
+    };
+  }
 }
+
+async processMessage(message, isAuthenticated) {
+  console.log("Procesando mensaje:", message);
+  console.log("Ollama disponible:", this.ollamaAvailable);
+  
+  // Patrones para detectar consultas de productos
+  const productInquiryPatterns = [
+    /quiero comprar (.*)/i,
+    /busco (.*)/i,
+    /tienes (.*)/i,
+    /hay (.*)/i,
+    /precio de (.*)/i,
+    /cuanto cuesta (.*)/i,
+    /me gustaria comprar (.*)/i,
+    /informacion sobre (.*)/i,
+    /info de (.*)/i,
+    /detalles de (.*)/i
+  ];
+  
+  const categoryInquiryPatterns = [
+    /tienes juegos de (.*)/i,
+    /hay juegos de (.*)/i,
+    /busco juegos de (.*)/i,
+    /juegos de (.*) disponibles/i,
+    /tienes (.*) games/i,
+    /me gustan los juegos de (.*)/i,
+    /me interesan los juegos de (.*)/i,
+    /quiero ver (.*) games/i,
+    /tienes consolas (.*)/i,
+    /consolas (.*) disponibles/i,
+    /busco consolas (.*)/i,
+    /hay consolas (.*)/i,
+    /tienes productos de (.*)/i
+  ];
+
+  for (const pattern of productInquiryPatterns) {
+    const match = message.match(pattern);
+    if (match && match[1]) {
+      const productQuery = match[1].trim();
+      const productInfo = await this.getProductInfo(productQuery);
+      
+      console.log("Información del producto:", productInfo);
+      
+      // Devolver directamente el mensaje (HTML o texto plano)
+      return productInfo.message;
+    }
+  }
+
+  for (const pattern of categoryInquiryPatterns) {
+    const match = message.match(pattern);
+    if (match && match[1]) {
+      const categoryQuery = match[1].trim();
+      console.log("Categoría detectada:", categoryQuery);
+      
+      const categoryResults = await this.searchProductsByCategory(categoryQuery);
+      console.log("Resultados de categoría:", categoryResults);
+      
+      return categoryResults.message;
+    }
+  }
+  
+  // Convertir mensaje a minúsculas para mejor coincidencia
+  const lowerMessage = message.toLowerCase();
+  
+  // Intentar coincidencia de patrones primero para consultas específicas
+  const patternMatch = await this.tryPatternMatching(lowerMessage, isAuthenticated);
+  
+  if (patternMatch) {
+    console.log("Respuesta por coincidencia de patrón:", patternMatch);
+    return patternMatch;
+  }
+  
+  // Si no hay coincidencia de patrones y Ollama está disponible
+  if (this.ollamaAvailable) {
+    console.log("Usando Ollama para respuesta...");
+    try {
+      const ollamaResponse = await this.getOllamaResponse(message, isAuthenticated);
+      console.log("Respuesta de Ollama:", ollamaResponse);
+      return ollamaResponse;
+    } catch (error) {
+      console.error('Error al obtener respuesta de Ollama:', error);
+      return this.getDefaultResponse();
+    }
+  } else {
+    console.log("Ollama no disponible, devolviendo respuesta predeterminada");
+    return this.getDefaultResponse();
+  }
+}
+
+async getProductInfo(productQuery) {
+  try {
+    console.log("Buscando información para:", productQuery);
+    
+    // Buscar el producto
+    const searchResults = await api.searchProducts(productQuery);
+    
+    if (searchResults.results && searchResults.results.length > 0) {
+      const product = searchResults.results[0]; // Obtener el mejor resultado
+      console.log("Producto encontrado:", product);
+      
+      // Construir un mensaje HTML con el enlace incorporado
+      const productLink = `<a href="/products/${product.slug}" class="product-link" target="_blank">Ver ${product.name}</a>`;
+      
+      return {
+        found: true,
+        product: product,
+        message: `¡Sí, tenemos "${product.name}"! Precio: ${product.price}. ${productLink}`,
+        htmlMessage: true
+      };
+    } else {
+      return {
+        found: false,
+        message: `Lo siento, no encontré ningún producto que coincida con "${productQuery}". ¿Quieres buscar algo más?`,
+        htmlMessage: false
+      };
+    }
+  } catch (error) {
+    console.error('Error al obtener información del producto:', error);
+    return {
+      found: false,
+      message: "Lo siento, tuve un problema al buscar ese producto. ¿Puedes intentar con otro término de búsqueda?",
+      htmlMessage: false
+    };
+  }
+}
+
+// Agregar estos métodos a ChatBotService.js
+
+// Método para buscar productos por categoría o género
+async searchProductsByCategory(category) {
+  try {
+    console.log("Buscando productos de la categoría:", category);
+    
+    // Determinar si es una búsqueda de género o de categoría/consola
+    let searchType = 'general';
+    
+    // Lista de géneros comunes de videojuegos
+    const genres = [
+      'accion', 'action', 'shooter', 'fps', 'disparos', 'aventura', 'adventure',
+      'rpg', 'rol', 'estrategia', 'strategy', 'deportes', 'sports', 'carreras', 'racing',
+      'simulacion', 'simulation', 'puzzle', 'arcade', 'plataformas', 'platform',
+      'terror', 'horror', 'supervivencia', 'survival', 'mundo abierto', 'open world'
+    ];
+    
+    // Lista de consolas
+    const consoles = [
+      'ps5', 'ps4', 'playstation', 'playstation 5', 'playstation 4',
+      'xbox', 'xbox one', 'xbox series', 'xbox series x', 'xbox series s',
+      'nintendo', 'switch', 'nintendo switch', 'pc', 'windows'
+    ];
+    
+    // Determinar el tipo de búsqueda basado en la categoría
+    const categoryLower = category.toLowerCase();
+    
+    if (genres.some(genre => categoryLower.includes(genre))) {
+      searchType = 'genero';
+    } else if (consoles.some(console => categoryLower.includes(console))) {
+      searchType = 'consola';
+    } else {
+      searchType = 'categoria';
+    }
+    
+    // Realizar la búsqueda usando la API
+    const searchResults = await api.searchProducts(category, searchType);
+    
+    if (searchResults.results && searchResults.results.length > 0) {
+      // Limitar a 5 resultados para no sobrecargar el mensaje
+      const topResults = searchResults.results.slice(0, 5);
+      
+      // Construir un mensaje HTML con enlaces a los productos
+      let messageHTML = `<p>He encontrado ${searchResults.results.length} productos en la categoría "${category}":</p><ul style="margin-top: 8px; padding-left: 20px;">`;
+      
+      topResults.forEach(product => {
+        messageHTML += `<li style="margin-bottom: 5px;"><a href="/products/${product.slug}" class="product-link" target="_blank">${product.name}</a> - $${product.price}</li>`;
+      });
+      
+      if (searchResults.results.length > 5) {
+        messageHTML += `<li>Y ${searchResults.results.length - 5} productos más...</li>`;
+      }
+      
+      messageHTML += '</ul>';
+      
+      return {
+        found: true,
+        count: searchResults.results.length,
+        message: messageHTML,
+        htmlMessage: true
+      };
+    } else {
+      return {
+        found: false,
+        message: `Lo siento, no encontré productos en la categoría "${category}". ¿Quieres buscar en otra categoría?`,
+        htmlMessage: false
+      };
+    }
+  } catch (error) {
+    console.error('Error al buscar productos por categoría:', error);
+    return {
+      found: false,
+      message: "Lo siento, tuve un problema al buscar esa categoría. ¿Puedes intentar con otra búsqueda?",
+      htmlMessage: false
+    };
+  }
+}
+
+}
+
+
+
 
 export default ChatBotService;

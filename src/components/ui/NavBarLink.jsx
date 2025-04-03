@@ -1,23 +1,19 @@
-import { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
-import { AuthContext } from '../../context/AuthContext'
+// src/components/ui/NavBarLink.jsx
+import { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 const NavBarLink = () => {
-
-    const { isAuthenticated, setIsAuthenticated, username } = useContext(AuthContext)
-
+    const { isAuthenticated, setIsAuthenticated, username, userRole, isAdmin } = useContext(AuthContext);
 
     function logout(){
-        localStorage.removeItem("access")
-        setIsAuthenticated(false)
-
+        localStorage.removeItem("access");
+        localStorage.removeItem("refresh");
+        setIsAuthenticated(false);
     }
 
     return (
         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-            {/* Add these links for everyone */}
-            
-            
             <li className="nav-item">
                 <NavLink
                 to="/contacto"
@@ -30,9 +26,37 @@ const NavBarLink = () => {
             </li>
             
             {isAuthenticated ? (
-                
                 <>
-
+                {/* If user is a seller, show seller dashboard link */}
+                {userRole === 'seller' && (
+                    <li className="nav-item">
+                        <NavLink
+                        to="/seller"
+                        className={({isActive}) => 
+                        isActive ? "nav-link active fw-semibold" : "nav-link fw-semibold"
+                        }
+                        end
+                        >
+                            Dashboard Vendedor
+                        </NavLink>
+                    </li>
+                )}
+                
+                {/* If user is an admin, show admin dashboard link */}
+                {isAdmin && (
+                    <li className="nav-item">
+                        <NavLink
+                        to="/admin"
+                        className={({isActive}) => 
+                        isActive ? "nav-link active fw-semibold" : "nav-link fw-semibold"
+                        }
+                        end
+                        >
+                            Panel Admin
+                        </NavLink>
+                    </li>
+                )}
+                
                 <li className="nav-item">
                     <NavLink
                     to="/profile"
@@ -41,7 +65,7 @@ const NavBarLink = () => {
                     }
                     end
                     >
-                        {`Hi, ${username}`}
+                        {`Hola, ${username}`}
                     </NavLink>
                 </li>
 
@@ -53,16 +77,12 @@ const NavBarLink = () => {
                     }
                     end
                     >
-                        cerrar sesion
+                        Cerrar Sesión
                     </NavLink>
                 </li>
-                
                 </>
-
             ):(
-
                 <>
-                
                 <li className="nav-item">
                 <NavLink
                     to="/login"
@@ -71,7 +91,7 @@ const NavBarLink = () => {
                     }
                     end
                     >
-                        Iniciar Sesion
+                        Iniciar Sesión
                     </NavLink>
                     </li>
 
@@ -86,13 +106,10 @@ const NavBarLink = () => {
                             Registrarse
                         </NavLink>
                     </li>
-                
                 </>
-            )
-            }
-                
-             </ul>
+            )}
+        </ul>
     )
 }
 
-export default NavBarLink
+export default NavBarLink;

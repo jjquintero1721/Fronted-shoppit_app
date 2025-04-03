@@ -1,0 +1,278 @@
+/* dark-theme.css - Add this file to your src folder */
+
+:root {
+  /* Main theme colors */
+  --dark-bg: #9b2aa8;
+  --dark-surface: #1e1e1e;
+  --dark-card: #252525;
+  --dark-card-hover: #2d2d2d;
+  --dark-accent: #6050DC; /* Keeping the accent color for branding */
+  --dark-accent-hover: #7868e6;
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --text-muted: #909090;
+  --border-color: #333333;
+}
+
+/* Apply dark background to the entire app */
+body {
+  background-color: var(--dark-bg);
+  color: var(--text-primary);
+}
+
+/* Card styling for dark theme */
+.card {
+  background-color: var(--dark-card) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.card-header {
+  background-color: var(--dark-accent) !important;
+  color: white !important;
+}
+
+.card-body {
+  background-color: var(--dark-card) !important;
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: var(--dark-surface) !important;
+}
+
+.navbar-brand {
+  color: var(--text-primary) !important;
+}
+
+.nav-link {
+  color: var(--text-primary) !important;
+}
+
+.nav-link.active {
+  color: var(--dark-accent) !important;
+  font-weight: bold;
+}
+
+/* Form controls */
+.form-control {
+  background-color: var(--dark-surface) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.form-control:focus {
+  background-color: var(--dark-surface) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--dark-accent) !important;
+  box-shadow: 0 0 0 0.25rem rgba(96, 80, 220, 0.25) !important;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--dark-accent) !important;
+  border-color: var(--dark-accent) !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--dark-accent-hover) !important;
+  border-color: var(--dark-accent-hover) !important;
+}
+
+/* Adjust text for better readability */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+/* Footer styling */
+footer {
+  background-color: var(--dark-surface) !important;
+}
+
+/* Card hover effects */
+.card:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Form labels */
+.form-label {
+  color: var(--text-primary);
+}
+
+/* Placeholders */
+::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 0.7 !important;
+}
+
+/* Alert styling */
+.alert-primary {
+  background-color: var(--dark-surface) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--dark-accent) !important;
+}
+
+/* Search styling */
+.searchInput {
+  background-color: var(--dark-surface) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Dropdown menus */
+.dropdown-menu {
+  background-color: var(--dark-surface) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dropdown-item {
+  color: var(--text-primary) !important;
+}
+
+.dropdown-item:hover {
+  background-color: var(--dark-card-hover) !important;
+}
+
+/* Tables */
+table {
+  color: var(--text-primary) !important;
+}
+
+/* Adjust product cards */
+.productImage {
+  background-color: var(--dark-card) !important;
+}
+
+/* CartItem adjustments */
+.cartItemContainer {
+  background-color: var(--dark-card) !important;
+}
+
+/* Category badges */
+.categoryBadge {
+  background-color: var(--dark-accent) !important;
+}
+
+/* Adjust form inputs for login/register */
+.login-card {
+  background-color: var(--dark-card) !important;
+  color: var(--text-primary) !important;
+}
+
+.login-title, .login-subtitle {
+  color: var(--text-primary) !important;
+}
+
+/* Profile card */
+.profileCard {
+  background-color: var(--dark-card) !important;
+}
+
+/* Add these to your dark-theme.css file */
+
+/* Improve text contrast and readability */
+h1, h2, h3, h4, h5, h6 {
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+p, span, div {
+  color: #e0e0e0;
+}
+
+/* Fix the white "Productos Relacionados" section */
+.row {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+}
+
+/* Ensure all sections have dark backgrounds */
+section {
+  background-color: #121212 !important;
+}
+
+/* Ensure all containers inherit the dark background */
+.container {
+  background-color: transparent !important;
+}
+
+/* Fix product details section */
+.product-detail-wrapper {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+}
+
+/* Add text shadow to make text more readable on images */
+.header-text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Make sure product cards have proper contrast */
+.card-title, .card-text {
+  color: #fff !important;
+}
+
+/* Price styling for better visibility */
+.price, .product-price {
+  color: #6050DC !important;
+  font-weight: bold !important;
+}
+
+/* Button styling consistency */
+.btn-primary, .btn-success, .btn-add-cart {
+  background-color: #6050DC !important;
+  border-color: #6050DC !important;
+}
+
+.btn-primary:hover, .btn-success:hover, .btn-add-cart:hover {
+  background-color: #4b3bcb !important;
+  border-color: #4b3bcb !important;
+}
+
+/* Specific fix for the white Productos Relacionados section */
+.related-products-section, #related-products {
+  background-color: #121212 !important;
+  color: #fff !important;
+}
+
+/* Stronger contrast for badges */
+.badge, .category-badge {
+  background-color: #6050DC !important;
+  color: white !important;
+}
+
+/* Ensure inputs have proper contrast */
+input, textarea, select {
+  background-color: #333 !important;
+  color: #e0e0e0 !important;
+  border-color: #444 !important;
+}
+
+/* Force any remaining white backgrounds to be dark */
+[class*="bg-white"], [style*="background-color: white"] {
+  background-color: #121212 !important;
+}
+
+/* Add this for sections with the GIF background */
+.gif-background {
+  background-image: url('/path/to/your/gif.gif') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Mantener la funcionalidad de row pero quitar el fondo negro */
+.row {
+  background-color: transparent !important;
+  background: none !important;
+}
+
+/* Si es necesario, asegurar que el elemento padre tampoco tenga fondo */
+.row-container, 
+div:has(> .row) {
+  background-color: transparent !important;
+  background: none !important;
+}

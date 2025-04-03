@@ -11,7 +11,7 @@
   .pageTitle {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #333;
+    color: #fffcfc;
     margin-bottom: 1rem;
     position: relative;
     display: inline-block;
@@ -32,13 +32,13 @@
     margin: 0 auto;
     font-size: 1.1rem;
     line-height: 1.6;
-    color: #555;
+    color: #aca8a8;
   }
   
   .contactSection {
     margin-top: 4rem;
     padding: 2rem;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(18, 17, 17, 0.9);
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -47,29 +47,33 @@
   .contactTitle {
     font-size: 2rem;
     font-weight: 600;
-    color: #333;
+    color: #f0ecec;
     margin-bottom: 1rem;
   }
   
   .contactDescription {
     max-width: 600px;
     margin: 0 auto 2rem;
-    color: #555;
+    color: #fffbfb;
   }
   
   .contactInfo {
+    color: #000000 !important;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 2rem;
     margin-top: 1.5rem;
+
   }
   
   .contactItem {
+    color: #000000 !important; 
     display: flex;
     align-items: center;
     gap: 0.5rem;
     font-size: 1.1rem;
+    
   }
   
   .contactIcon {

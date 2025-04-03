@@ -13,9 +13,9 @@ const ContactPage = () => {
     {
       id: 1,
       name: 'Juan Jose Quintero',
-      role: 'CEO & Desarrollador de todo',
+      role: 'La pampara',
       image: defaultProfile, // Replace with actual image
-      description: 'Líder del equipo elaboro todo el backend y todo el fronted, le gusta molestar a arle.',
+      description: 'Líder del equipo no elaboro nada lo hizo todo la IA, le gusta molestar a arle.',
       socialLinks: [
         { name: 'LinkedIn', url: 'https://linkedin.com/', icon: <FaLinkedin /> },
         { name: 'GitHub', url: 'https://github.com/jjquintero1721', icon: <FaGithub /> },

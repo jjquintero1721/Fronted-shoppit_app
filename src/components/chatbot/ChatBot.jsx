@@ -101,38 +101,44 @@ const ChatBot = () => {
         <div className={styles.chatHeader}>
           <div className={styles.chatTitle}>
             <FaRobot className={styles.chatHeaderIcon} />
-            <span>Asistente A.I.A.G</span>
+            <span>Chat con A.I.A.G</span>
           </div>
           <button className={styles.closeButton} onClick={toggleChat}>
             <FaTimes />
           </button>
         </div>
         
-        <div className={styles.chatMessages}>
-          {messages.map((msg, index) => (
-            <div 
-              key={index} 
-              className={`${styles.message} ${
-                msg.sender === 'user' ? styles.userMessage : styles.botMessage
-              }`}
-            >
-              <div className={styles.messageContent}>
-                <p>{msg.text}</p>
-                <span className={styles.messageTime}>{formatTime(msg.timestamp)}</span>
-              </div>
-            </div>
-          ))}
-          {isTyping && (
-            <div className={`${styles.message} ${styles.botMessage}`}>
-              <div className={styles.typingIndicator}>
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-          )}
-          <div ref={messagesEndRef} />
-        </div>
+        
+<div className={styles.chatMessages}>
+  {messages.map((msg, index) => (
+    <div 
+      key={index} 
+      className={`${styles.message} ${
+        msg.sender === 'user' ? styles.userMessage : styles.botMessage
+      }`}
+    >
+      <div className={styles.messageContent}>
+        {/* Usar dangerouslySetInnerHTML para cualquier mensaje que contenga HTML */}
+        {typeof msg.text === 'string' && msg.text.includes('<') && msg.text.includes('>') ? (
+          <p dangerouslySetInnerHTML={{ __html: msg.text }}></p>
+        ) : (
+          <p>{msg.text}</p>
+        )}
+        <span className={styles.messageTime}>{formatTime(msg.timestamp)}</span>
+      </div>
+    </div>
+  ))}
+  {isTyping && (
+    <div className={`${styles.message} ${styles.botMessage}`}>
+      <div className={styles.typingIndicator}>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  )}
+  <div ref={messagesEndRef} />
+</div>
         
         <form className={styles.chatInputContainer} onSubmit={handleSubmit}>
           <input

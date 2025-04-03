@@ -1,3 +1,4 @@
+/* src/components/search/SearchBar.module.css */
 .searchForm {
     display: flex;
     flex-grow: 1;
@@ -14,11 +15,13 @@
   .searchInput {
     flex-grow: 1;
     padding: 8px 40px 8px 12px;
-    border: 1px solid #ced4da;
+    border: 1px solid #444;
     border-radius: 20px;
     font-size: 0.9rem;
     outline: none;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    background-color: #2d2d2d;
+    color: #e0e0e0;
   }
   
   .searchInput:focus {

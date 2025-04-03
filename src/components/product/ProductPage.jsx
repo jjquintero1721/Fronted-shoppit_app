@@ -15,9 +15,6 @@ const ProductPage = ({ setNumberCartItems }) => {
   const [inCart, setInCart] = useState(false);
   const cart_code = localStorage.getItem("cart_code");
 
-  // We'll directly use the product image without loading/error states
-  // This is because the error handling was causing issues
-
   useEffect(() => {
     if (product.id) {
       api
@@ -70,15 +67,14 @@ const ProductPage = ({ setNumberCartItems }) => {
 
   return (
     <div>
-      <section className="py-5">
+      <section className="py-5" style={{backgroundColor: 'transparent'}}>
         <div className="container px-4 px-lg-5 my-5">
           <div className="row gx-5 align-items-center">
             <div className="col-md-6">
-              <div className={styles.productImageContainer}>
+              <div className={styles.productImageContainerTransparent}>
                 {product.category && (
                   <span className={styles.categoryBadge}>{product.category}</span>
                 )}
-                {/* Directly display the image without conditionals */}
                 <img
                   className={styles.productImage}
                   src={`${BASE_URL}${product.image}`}
@@ -87,7 +83,7 @@ const ProductPage = ({ setNumberCartItems }) => {
               </div>
             </div>
             <div className="col-md-6">
-              <div className="small mb-1">SKU: GAME-{product.id || "000"}</div>
+              <div className="small mb-1 text-light">SKU: GAME-{product.id || "000"}</div>
               <h1 className={styles.productTitle}>{product.name}</h1>
               <div className={styles.productPrice}>${product.price}</div>
               <p className={styles.productDescription}>{product.description}</p>

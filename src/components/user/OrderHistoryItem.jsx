@@ -20,11 +20,11 @@ const OrderHistoryItem = ({item}) => {
                 <p>{`Order Date: ${FormatDate(item.order_date)}`}</p>
                 <p>{`Order ID: ${item.order_id}`}</p>
             </div>
-            <div className='col-md-2 text-center'>
-                <h6 className='text-muted'>{`Quantity: ${item.quantity}`}</h6>
+            <div className='col-md-2 text-center' >
+                <h6 className='' style={{ color: 'white' }}>{`Quantity: ${item.quantity}`}</h6>
             </div>
             <div className='col-md-2 text-center'>
-                <h6 className='text-muted'>{`$${item.product.price}`}</h6>
+                <h6 className=''>{`$${item.product.price}`}</h6>
             </div>
         </div>
     </div>
