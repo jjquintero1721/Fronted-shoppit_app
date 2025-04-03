@@ -1,32 +1,33 @@
-// src/components/admin/AdminDashboard.jsx
+// src/components/vendor/VendorDashboard.jsx
 import { useState } from 'react';
 import { Tab, Nav, Container, Row, Col, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import AdminStats from './AdminStats';
-import ProductRequestsAdmin from './ProductRequestsAdmin';
-import styles from './AdminDashboard.module.css';
+import VendorStats from './VendorStats';
+import ProductRequestList from './ProductRequestList';
+import NewProductForm from './NewProductForm';
+import styles from './VendorDashboard.module.css';
 
-const AdminDashboard = () => {
+const VendorDashboard = () => {
   const [activeTab, setActiveTab] = useState('stats');
-  const { isAuthenticated, username, isAdmin } = useContext(AuthContext);
+  const { isAuthenticated, username, userRole } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // Redirigir si el usuario no está autenticado o no es admin
+  // Redirigir si el usuario no está autenticado o no es vendedor
   if (!isAuthenticated) {
     navigate('/login');
     return null;
   }
 
-  if (!isAdmin) {
+  if (userRole !== 'vendor') {
     return (
       <Container className="my-5">
         <Card className={styles.errorCard}>
           <Card.Body>
             <Card.Title>Acceso denegado</Card.Title>
             <Card.Text>
-              Esta área es solo para administradores. Tu cuenta actual no tiene permisos de administrador.
+              Esta área es solo para vendedores. Tu cuenta actual no tiene permisos de vendedor.
             </Card.Text>
             <button 
               className="btn btn-primary" 
@@ -42,8 +43,8 @@ const AdminDashboard = () => {
 
   return (
     <Container className="my-4">
-      <h2 className={styles.dashboardTitle}>Panel de Administrador</h2>
-      <p className={styles.welcomeText}>Bienvenido, {username}. Administra la plataforma desde aquí.</p>
+      <h2 className={styles.dashboardTitle}>Panel de Vendedor</h2>
+      <p className={styles.welcomeText}>Bienvenido, {username}. Administra tus productos y ventas aquí.</p>
       
       <Tab.Container activeKey={activeTab} onSelect={(k) => setActiveTab(k)}>
         <Row>
@@ -55,7 +56,7 @@ const AdminDashboard = () => {
                   className={styles.navLink}
                   active={activeTab === 'stats'}
                 >
-                  Estadísticas de la plataforma
+                  Estadísticas de ventas
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
@@ -64,7 +65,16 @@ const AdminDashboard = () => {
                   className={styles.navLink}
                   active={activeTab === 'requests'}
                 >
-                  Solicitudes de productos
+                  Mis solicitudes
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link 
+                  eventKey="newProduct" 
+                  className={styles.navLink}
+                  active={activeTab === 'newProduct'}
+                >
+                  Nueva solicitud
                 </Nav.Link>
               </Nav.Item>
             </Nav>
@@ -72,10 +82,13 @@ const AdminDashboard = () => {
           <Col md={9}>
             <Tab.Content>
               <Tab.Pane eventKey="stats">
-                <AdminStats />
+                <VendorStats />
               </Tab.Pane>
               <Tab.Pane eventKey="requests">
-                <ProductRequestsAdmin />
+                <ProductRequestList />
+              </Tab.Pane>
+              <Tab.Pane eventKey="newProduct">
+                <NewProductForm />
               </Tab.Pane>
             </Tab.Content>
           </Col>
@@ -85,4 +98,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default VendorDashboard;

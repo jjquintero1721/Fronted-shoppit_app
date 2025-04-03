@@ -3,79 +3,89 @@ import { jwtDecode } from "jwt-decode";
 import { createContext, useEffect, useState } from "react";
 import api from "../api";
 
-// Create the context with default values
+// Crear el contexto con un valor predeterminado
 const AuthContext = createContext({
     isAuthenticated: false,
     username: "",
-    userRole: "",
+    userRole: "user",
     isAdmin: false,
-    isLoading: true,
+    isVendor: false,
     setIsAuthenticated: () => {},
     get_username: () => {}
 });
 
-// Separate Provider component
-function AuthProvider({ children }) {
+// Separar el Provider como un componente independiente
+function AuthProvider({children}){
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [username, setUsername] = useState("");
-    const [userRole, setUserRole] = useState("");
+    const [userRole, setUserRole] = useState("user");
     const [isAdmin, setIsAdmin] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isVendor, setIsVendor] = useState(false);
 
     const handleAuth = () => {
         const token = localStorage.getItem("access");
-        if (token) {
+        if(token){
             const decoded = jwtDecode(token);
             const expiry_date = decoded.exp;
             const current_time = Date.now() / 1000;
-            if (expiry_date >= current_time) {
+            if(expiry_date >= current_time){
                 setIsAuthenticated(true);
-                getUserInfo();
-            } else {
-                setIsLoading(false);
             }
-        } else {
-            setIsLoading(false);
         }
     };
 
-    function get_username() {
+    function get_username(){
         api.get("get_username")
-            .then(res => {
-                setUsername(res.data.username);
+        .then(res => {
+            setUsername(res.data.username);
+            
+            // También obtener el rol del usuario
+            api.get("user_info")
+            .then(userInfo => {
+                // Comprobar si es admin
+                if (userInfo.data.is_staff) {
+                    setUserRole("admin");
+                    setIsAdmin(true);
+                    setIsVendor(false);
+                } 
+                // Comprobar si es vendedor
+                else if (userInfo.data.role === "vendor") {
+                    setUserRole("vendor");
+                    setIsVendor(true);
+                    setIsAdmin(false);
+                } 
+                // Por defecto es usuario normal
+                else {
+                    setUserRole("user");
+                    setIsVendor(false);
+                    setIsAdmin(false);
+                }
             })
             .catch(err => {
                 console.log(err.message);
             });
-    }
-    
-    function getUserInfo() {
-        api.get("user_info")
-            .then(res => {
-                setUsername(res.data.username);
-                setUserRole(res.data.role);
-                setIsAdmin(res.data.is_staff);
-                setIsLoading(false);
-            })
-            .catch(err => {
-                console.log("Error getting user info:", err.message);
-                setIsLoading(false);
-            });
+        })
+        .catch(err => {
+            console.log(err.message);
+        });
     }
 
-    useEffect(() => {
+    useEffect(function(){
         handleAuth();
-    }, []);
+        if (isAuthenticated) {
+            get_username();
+        }
+    }, [isAuthenticated]);
 
     const authValue = {
-        isAuthenticated,
-        username,
+        isAuthenticated, 
+        username, 
         userRole,
         isAdmin,
-        isLoading,
-        setIsAuthenticated,
+        isVendor,
+        setIsAuthenticated, 
         get_username
-    };
+    };  
 
     return (
         <AuthContext.Provider value={authValue}>
@@ -84,5 +94,5 @@ function AuthProvider({ children }) {
     );
 }
 
-// Export the context and provider separately
+// Exportar el contexto y el provider separadamente
 export { AuthContext, AuthProvider };

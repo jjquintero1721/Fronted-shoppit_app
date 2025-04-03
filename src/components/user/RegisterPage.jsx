@@ -1,4 +1,3 @@
-// src/components/user/RegisterPage.jsx
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../api";
@@ -18,7 +17,7 @@ const RegisterPage = () => {
     phone: "",
     city: "",
     state: "",
-    role: "user" // Default role
+    role: "user"  // Por defecto es 'user'
   });
   
   const [loading, setLoading] = useState(false);
@@ -38,14 +37,14 @@ const RegisterPage = () => {
     setLoading(true);
     setError("");
     
-    // Validate that the passwords match
+    // Validar que las contraseñas coincidan
     if (formData.password !== formData.confirmPassword) {
       setError("Las contraseñas no coinciden");
       setLoading(false);
       return;
     }
     
-    // Prepare the data to send (without confirmPassword)
+    // Preparar los datos para enviar (sin confirmPassword)
     const registerData = {
       username: formData.username,
       email: formData.email,
@@ -58,7 +57,7 @@ const RegisterPage = () => {
       role: formData.role
     };
     
-    // Send registration request
+    // Enviar solicitud de registro
     api.post("register/", registerData)
       .then(res => {
         setSuccess(res.data.success);
@@ -76,28 +75,22 @@ const RegisterPage = () => {
         });
         setLoading(false);
         
-        // Redirect to login after 2 seconds
+        // Redirigir al login después de 2 segundos
         setTimeout(() => {
           navigate("/login");
         }, 2000);
       })
       .catch(err => {
         if (err.response?.status === 400) {
-          if (err.response.data?.error?.includes("Username already exists")) {
-            setError("Este nombre de usuario ya está en uso. Por favor elige otro diferente.");
-          } else if (err.response.data?.error?.includes("Email already in use")) {
-            setError("Este correo electrónico ya está registrado. Por favor usa uno diferente o inicia sesión con tu cuenta.");
-          } else {
-            setError(err.response.data?.error || "Por favor revisa tu información e intenta de nuevo.");
-          }
+          setError(err.response.data?.error || "Por favor, verifica tu información e intenta nuevamente.");
         } else if (err.message.includes("Network Error")) {
-          setError("No se pudo conectar con el servidor. Por favor revisa tu conexión a internet.");
+          setError("No se puede conectar con el servidor. Por favor, verifica tu conexión a internet.");
         } else {
-          setError("Falló el registro. Por favor intenta de nuevo o contacta con soporte si el problema persiste.");
+          setError("Error al registrarse. Por favor, intenta nuevamente o contacta con soporte.");
         }
         
         setLoading(false);
-      });
+      })
   };
   
   return (
@@ -111,12 +104,12 @@ const RegisterPage = () => {
         )}
         
         <h2 className="login-title">Crear Nueva Cuenta</h2>
-        <p className="login-subtitle">Regístrate en A.I.A.G</p>
+        <p className="login-subtitle">Únete a AIAG Shop</p>
         
         <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-md-6 mb-3">
-              <label htmlFor="username" className="form-label">Usuario*</label>
+              <label htmlFor="username" className="form-label">Nombre de usuario*</label>
               <input
                 type="text"
                 className="form-control"
@@ -138,7 +131,7 @@ const RegisterPage = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Ingresa tu email"
+                placeholder="Introduce tu email"
                 required
               />
             </div>
@@ -154,12 +147,12 @@ const RegisterPage = () => {
                 name="first_name"
                 value={formData.first_name}
                 onChange={handleChange}
-                placeholder="Ingresa tu nombre"
+                placeholder="Introduce tu nombre"
               />
             </div>
             
             <div className="col-md-6 mb-3">
-              <label htmlFor="last_name" className="form-label">Apellido</label>
+              <label htmlFor="last_name" className="form-label">Apellidos</label>
               <input
                 type="text"
                 className="form-control"
@@ -167,7 +160,7 @@ const RegisterPage = () => {
                 name="last_name"
                 value={formData.last_name}
                 onChange={handleChange}
-                placeholder="Ingresa tu apellido"
+                placeholder="Introduce tus apellidos"
               />
             </div>
           </div>
@@ -182,7 +175,7 @@ const RegisterPage = () => {
                 name="city"
                 value={formData.city}
                 onChange={handleChange}
-                placeholder="Ingresa tu ciudad"
+                placeholder="Introduce tu ciudad"
               />
             </div>
             
@@ -195,7 +188,7 @@ const RegisterPage = () => {
                 name="state"
                 value={formData.state}
                 onChange={handleChange}
-                placeholder="Ingresa tu estado o provincia"
+                placeholder="Introduce tu estado/provincia"
               />
             </div>
           </div>
@@ -209,13 +202,13 @@ const RegisterPage = () => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="Ingresa tu número de teléfono"
+              placeholder="Introduce tu número de teléfono"
             />
           </div>
           
-          {/* Role selection */}
+          {/* Campo de selección de rol */}
           <div className="mb-3">
-            <label htmlFor="role" className="form-label">Tipo de Cuenta*</label>
+            <label htmlFor="role" className="form-label">Tipo de cuenta*</label>
             <select
               className="form-control"
               id="role"
@@ -224,11 +217,11 @@ const RegisterPage = () => {
               onChange={handleChange}
               required
             >
-              <option value="user">Usuario Regular</option>
-              <option value="seller">Vendedor</option>
+              <option value="user">Usuario normal (Solo compras)</option>
+              <option value="vendor">Vendedor (Compras y ventas)</option>
             </select>
-            <small className="text-muted">
-              Los vendedores pueden publicar productos para venta después de la aprobación del administrador.
+            <small className="form-text text-muted">
+              Selecciona "Vendedor" si quieres vender productos en nuestra plataforma.
             </small>
           </div>
           
@@ -247,7 +240,7 @@ const RegisterPage = () => {
           </div>
           
           <div className="mb-3">
-            <label htmlFor="confirmPassword" className="form-label">Confirmar Contraseña*</label>
+            <label htmlFor="confirmPassword" className="form-label">Confirmar contraseña*</label>
             <input
               type="password"
               className="form-control"
@@ -265,12 +258,12 @@ const RegisterPage = () => {
             className="btn btn-primary w-100"
             disabled={loading}
           >
-            {loading ? "Creando Cuenta..." : "Registrarse"}
+            {loading ? "Creando cuenta..." : "Registrarse"}
           </button>
         </form>
         
         <div className="login-footer text-center mt-3">
-          <p>¿Ya tienes una cuenta? <Link to="/login">Iniciar Sesión</Link></p>
+          <p>¿Ya tienes una cuenta? <Link to="/login">Iniciar sesión</Link></p>
         </div>
       </div>
     </div>

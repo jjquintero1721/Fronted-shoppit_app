@@ -1,0 +1,136 @@
+/* src/components/vendor/VendorDashboard.module.css */
+.dashboardTitle {
+    color: #f0f0f0;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  }
+  
+  .welcomeText {
+    color: #c0c0c0;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .navLink {
+    color: #e0e0e0 !important;
+    background-color: #2d2d2d;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    transition: all 0.2s ease;
+  }
+  
+  .navLink:hover {
+    background-color: #3d3d3d !important;
+    transform: translateX(5px);
+  }
+  
+  .navLink.active {
+    background-color: #6050DC !important;
+    color: white !important;
+    font-weight: 600;
+  }
+  
+  .errorCard {
+    background-color: rgba(30, 30, 30, 0.9) !important;
+    border: 1px solid #6050DC !important;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  /* Estilos para el formulario */
+  .formSection {
+    background-color: #252525;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .sectionTitle {
+    color: #f0f0f0;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid #444;
+    padding-bottom: 0.5rem;
+  }
+  
+  .formCard {
+    background-color: #2a2a2a !important;
+    border: none !important;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .formBody {
+    padding: 1.5rem;
+  }
+  
+  .submitBtn {
+    background-color: #6050DC;
+    border: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+  
+  .submitBtn:hover {
+    background-color: #7868e6;
+    transform: translateY(-2px);
+  }
+  
+  .statusBadge {
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.35rem 0.65rem;
+    border-radius: 30px;
+  }
+  
+  .pendingBadge {
+    background-color: #ffc107 !important;
+    color: #212529 !important;
+  }
+  
+  .approvedBadge {
+    background-color: #28a745 !important;
+    color: white !important;
+  }
+  
+  .rejectedBadge {
+    background-color: #dc3545 !important;
+    color: white !important;
+  }
+  
+  /* Estilos para las estadísticas */
+  .statsCard {
+    background-color: #2a2a2a !important;
+    border: 1px solid #3a3a3a !important;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .statsCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .statsValue {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #6050DC;
+    margin-bottom: 0.5rem;
+  }
+  
+  .statsLabel {
+    color: #a0a0a0;
+    font-size: 1rem;
+  }
+  
+  .earningsValue {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #28a745;
+    margin-bottom: 0.5rem;
+  }
